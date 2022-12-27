@@ -9,3 +9,7 @@ class Constants:
     MOVEMENT_SKILL_TAG = "mws"
     FACE_VIEWER_SKILL_TAG = "fvs"
     SERVO_SKILL_TAG = "sds"
+
+    REDIS_HOST = ""
+    REDIS_PORT = 6379
+    REDIS_TIMEOUT = 3000
