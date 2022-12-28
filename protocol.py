@@ -14,17 +14,15 @@ class Protocol:
     ABSENT_SERVO_VALUE = 0x11
     ABSENT_MOOD = 0x12
 
-    def __init__(self, skill_dict):
-        self.skill_dict = skill_dict
-
     def prepare_packet(self, data: list) -> str:
         data_string = f"{self.tags_delimiter}".join(data)
-        return f"{self.start_symbol}{data_string}{self.end_symbol}"
+        # return f"{self.start_symbol}{data_string}{self.end_symbol}"
+        return f"{data_string}"
 
     def parse_packet(self, packet: str) -> list:
+        # packets: list = packet.replace(self.start_symbol, "").replace(self.end_symbol, "").split(self.tags_delimiter)
         packets: list = packet.split(self.tags_delimiter)
         answer = list()
         for pack in packets:
-            split_pack = tuple(pack.split(self.tag_value_delimiter))
-            answer.append((self.skill_dict.get(split_pack[0]), split_pack[1]))
+            answer.append(tuple(pack.split(self.tag_value_delimiter)))
         return answer
