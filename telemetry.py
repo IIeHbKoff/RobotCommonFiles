@@ -1,67 +1,68 @@
 class Telemetry:
-    instance = None
-    _params_list = ['rwS', 'lwS', 'sch0', 'sch1', 'sch2', 'sch3', 'sch4', 'sch5', 'sch6', 'sch7', 'sch8',
-                    'sch9', 'coX', 'coY', 'coZ', 'gyX', 'gyY', 'gyZ', 'acX', 'acY', 'acZ', 'tmp', 'dist',
-                    'battery', 'mood', 'errors']
+    _instance = None
+    client_params = ['coX', 'coY', 'coZ', 'gyX', 'gyY', 'gyZ', 'acX', 'acY', 'acZ', 'tmp', 'dist', 'battery']
+    server_params = ['rws', 'lws', 'sch0', 'sch1', 'sch2', 'sch3', 'sch4', 'sch5', 'sch6', 'sch7', 'sch8', 'sch9',
+                     'mood']
 
     def __new__(cls, *args, **kwargs):
-        if cls.instance is None:
-            cls.instance = super(Telemetry, cls).__new__(cls)
-        return cls.instance
+        if cls._instance is None:
+            cls._instance = super(Telemetry, cls).__new__(cls)
+            cls._rws: int = 0  # right wheel speed
+            cls._lws: int = 0  # left wheel speed
 
-    def __init__(self):
-        self._rwS: int = 0  # right wheel speed
-        self._lwS: int = 0  # left wheel speed
+            cls._sch0: int = 0  # servo channel 0
+            cls._sch1: int = 0  # servo channel 1
+            cls._sch2: int = 0  # servo channel 2
+            cls._sch3: int = 0  # servo channel 3
+            cls._sch4: int = 0  # servo channel 4
+            cls._sch5: int = 0  # servo channel 5
+            cls._sch6: int = 0  # servo channel 6
+            cls._sch7: int = 0  # servo channel 7
+            cls._sch8: int = 0  # servo channel 8
+            cls._sch9: int = 0  # servo channel 9
 
-        self._sch0: int = 0  # servo channel 0
-        self._sch1: int = 0  # servo channel 1
-        self._sch2: int = 0  # servo channel 2
-        self._sch3: int = 0  # servo channel 3
-        self._sch4: int = 0  # servo channel 4
-        self._sch5: int = 0  # servo channel 5
-        self._sch6: int = 0  # servo channel 6
-        self._sch7: int = 0  # servo channel 7
-        self._sch8: int = 0  # servo channel 8
-        self._sch9: int = 0  # servo channel 9
+            cls._coX: int = 0  # compas x
+            cls._coY: int = 0  # compas y
+            cls._coZ: int = 0  # compas z
 
-        self._coX: int = 0  # compas x
-        self._coY: int = 0  # compas y
-        self._coZ: int = 0  # compas z
+            cls._gyX: int = 0  # gyroscope x
+            cls._gyY: int = 0  # gyroscope y
+            cls._gyZ: int = 0  # gyroscope z
 
-        self._gyX: int = 0  # gyroscope x
-        self._gyY: int = 0  # gyroscope y
-        self._gyZ: int = 0  # gyroscope z
+            cls._acX: int = 0  # accelerometer x
+            cls._acY: int = 0  # accelerometer y
+            cls._acZ: int = 0  # accelerometer z
 
-        self._acX: int = 0  # accelerometer x
-        self._acY: int = 0  # accelerometer y
-        self._acZ: int = 0  # accelerometer z
+            cls._tmp: int = 0  # temperature
+            cls._dist: int = 0  # distance
+            cls._battery: int = 0  # battery level
 
-        self._tmp: int = 0  # temperature
-        self._dist: int = 0  # distance
-        self._battery: int = 0  # battery level
+            cls._mood: list = [0, 0, 0, 0, 0, 0, 0, 0]
 
-        self._mood: str = "void"
-
-        self._errors: list = []
+            cls._errors: list = []
+        return cls._instance
 
     def get_current_telemetry(self) -> list:
-        return [f"{param}:{getattr(self, param)}" for param in self._params_list]
+        return [f"{param}:{getattr(self, param)}" for param in self.client_params]
+
+    def get_current_cmds(self) -> list:
+        return [f"{param}:{getattr(self, param)}" for param in self.server_params]
 
     @property
-    def rwS(self):
-        return self._rwS
+    def rws(self):
+        return self._rws
 
-    @rwS.setter
-    def rwS(self, value):
-        self._rwS = value
+    @rws.setter
+    def rws(self, value):
+        self._rws = value
 
     @property
-    def lwS(self):
-        return self._lwS
+    def lws(self):
+        return self._lws
 
-    @lwS.setter
-    def lwS(self, value):
-        self._lwS = value
+    @lws.setter
+    def lws(self, value):
+        self._lws = value
 
     @property
     def sch0(self):
