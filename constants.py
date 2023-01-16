@@ -9,6 +9,8 @@ class Constants:
     MOVEMENT_SKILL_TAG = "mws"
     FACE_VIEWER_SKILL_TAG = "fvs"
     SERVO_SKILL_TAG = "sds"
+    DISTANCE_METER_SKILL_TAG = "dms"
+
     SERVOS_CHANNELS = {
         0: {"name": "sch0", "is_inverted": False},
         1: {"name": "sch1", "is_inverted": False},
