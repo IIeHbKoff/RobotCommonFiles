@@ -1,6 +1,7 @@
 class Telemetry:
     _instance = None
-    client_params = ['coX', 'coY', 'coZ', 'gyX', 'gyY', 'gyZ', 'acX', 'acY', 'acZ', 'tmp', 'dist', 'battery']
+    client_params = ['coX', 'coY', 'coZ', 'gyX', 'gyY', 'gyZ', 'acX', 'acY', 'acZ', 'temperature', 'pressure', 'dist',
+                     'battery']
     server_params = ['rws', 'lws', 'sch0', 'sch1', 'sch2', 'sch3', 'sch4', 'sch5', 'sch6', 'sch7', 'sch8', 'sch9',
                      'mood']
 
@@ -33,7 +34,8 @@ class Telemetry:
             cls._acY: int = 0  # accelerometer y
             cls._acZ: int = 0  # accelerometer z
 
-            cls._tmp: int = 0  # temperature
+            cls._temperature: int = 0  # temperature
+            cls._pressure: int = 0  # pressure
             cls._dist: int = 0  # distance
             cls._battery: int = 0  # battery level
 
@@ -217,12 +219,20 @@ class Telemetry:
         self._acZ = value
 
     @property
-    def tmp(self):
-        return self._tmp
+    def temperature(self):
+        return self._temperature
 
-    @tmp.setter
-    def tmp(self, value):
-        self._tmp = value
+    @temperature.setter
+    def temperature(self, value):
+        self._temperature = value
+
+    @property
+    def pressure(self):
+        return self._pressure
+
+    @pressure.setter
+    def pressure(self, value):
+        self._pressure = value
 
     @property
     def dist(self):

@@ -12,6 +12,7 @@ class Constants:
     DISTANCE_METER_SKILL_TAG = "dms"
     COMPAS_TAG = "cos"
     ACCELEROMETER_AND_GYROSCOPE_TAG = "ags"
+    MICRO_CLIMATE_SKILL_TAG = "mcs"
 
     SERVOS_CHANNELS = {
         0: {"name": "sch0", "is_inverted": False},
