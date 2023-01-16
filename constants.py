@@ -10,6 +10,8 @@ class Constants:
     FACE_VIEWER_SKILL_TAG = "fvs"
     SERVO_SKILL_TAG = "sds"
     DISTANCE_METER_SKILL_TAG = "dms"
+    COMPAS_TAG = "cos"
+    ACCELEROMETER_AND_GYROSCOPE_TAG = "ags"
 
     SERVOS_CHANNELS = {
         0: {"name": "sch0", "is_inverted": False},
