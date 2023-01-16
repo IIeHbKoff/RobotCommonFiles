@@ -73,12 +73,11 @@ class FileManager:
             self._rows = {row[0]: [int(i) for i in row[1].split(", ")] for row in reader}
         return self._rows
 
-    def write_rows(self, rows: dict):
-        with open(self._file_name, "w") as csv_file:
+    def write_row(self, row: tuple):
+        with open(self._file_name, "a") as csv_file:
             writer = csv.writer(csv_file, delimiter="|")
-            self._rows.update(rows)
-            for key, value in rows:
-                writer.writerow([key, str(value).replace("'", "")])
+            self._rows[row[0]] = row[1]
+            writer.writerow([row[0], str(row[1])[1:-1].replace("'", "")])
 
     def _rewrite_all_rows(self):
         with open(self._file_name, "w") as csv_file:
@@ -91,6 +90,6 @@ class FileManager:
             del self._rows[row]
             self._rewrite_all_rows()
 
-    def edit_row(self, row: dict):
-        self._rows.update(row)
+    def edit_row(self, row: tuple):
+        self._rows[row[0]] = row[1]
         self._rewrite_all_rows()
